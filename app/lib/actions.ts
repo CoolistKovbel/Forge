@@ -2,12 +2,14 @@
 
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import dbConnect from "./db";
 
 
 
 export async function RegisterUser( prevState: string | undefined,
     formData: FormData) {
     try {
+        await dbConnect()
         
         const {username, email, password, signature} =  Object.fromEntries(formData);
 
