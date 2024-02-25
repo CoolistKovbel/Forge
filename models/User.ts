@@ -9,6 +9,8 @@ interface IUser {
   role: string;
   isPro: boolean;
   metaAddress: string;
+  membership: boolean;
+  token: String;
   signature: string;
   mainBot: Types.ObjectId | BotDocument;
 }
@@ -32,6 +34,14 @@ const UserSchema = new mongoose.Schema<IUser>(
     password: {
       type: String,
       required: true,
+    },
+    membership: {
+      type: Boolean,
+      default: false
+    },
+    token: {
+      type: String,
+      default: "12"
     },
     image: {
       type: String,

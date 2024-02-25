@@ -4,6 +4,12 @@ import Link from "next/link";
 import React from "react";
 
 const LoginPage = () => {
+
+
+  const message = process.env.SIGNMESSAGE as string
+
+
+
   return (
     <div className="max-w-[500px] w-full mx-auto p-8 rounded-lg border-2 border-gray-800 shadow-lg">
       <h2 className="text-3xl md:text-5xl font-bold mb-6">Login</h2>
@@ -28,7 +34,7 @@ const LoginPage = () => {
       </div>
 
       {/* MetaForm */}
-      <MetaForm />
+      <MetaForm  outsideLove={message}/>
 
 
     </div>

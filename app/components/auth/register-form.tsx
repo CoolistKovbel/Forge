@@ -1,26 +1,37 @@
 "use client";
 
 import { RegisterUser } from "@/app/lib/actions";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
+import { ethers } from "ethers";
 
 export const RegisterForm = () => {
-  const [state, dispatch] = useFormState(RegisterUser, undefined);
+  const [signature, setSignature] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const router = useRouter();
+  const registerWithSignature = RegisterUser.bind(null, signature);
+  const [state, dispatch] = useFormState(registerWithSignature, undefined);
 
-    const formData = new FormData(e.currentTarget);
+  const getUserSignature = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const message = process.env.SIGNMESSAGE as string;
 
-    try {
-      dispatch(formData);
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    let signature = await signer.signMessage(message);
+    setSignature(signature);
+
+    const userAddress = ethers.utils.verifyMessage(message, signature);
+    console.log(userAddress);
   };
+
+  useEffect(() => {
+    if (state?.startsWith("success create")) return router.push("/login");
+  }, [state, router]);
 
   return (
     <>
-      <form className="mb-8 w-full">
+      <form className="mb-8 w-full" action={dispatch}>
         <div className="mb-4">
           <label htmlFor="email" className="block text-gray-400 text-sm mb-2">
             Email:
@@ -61,7 +72,6 @@ export const RegisterForm = () => {
             className="w-full px-4 py-2 rounded-md border border-gray-600 focus:outline-none focus:border-blue-400  text-black"
           />
         </div>
-
 
         <div className="mb-4">
           <label
