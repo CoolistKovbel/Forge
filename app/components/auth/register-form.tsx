@@ -1,6 +1,23 @@
 "use client";
 
+import { RegisterUser } from "@/app/lib/actions";
+import { useFormState } from "react-dom";
+
 export const RegisterForm = () => {
+  const [state, dispatch] = useFormState(RegisterUser, undefined);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    try {
+      dispatch(formData);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <>
       <form className="mb-8 w-full">
@@ -41,6 +58,21 @@ export const RegisterForm = () => {
             type="password"
             id="password"
             name="password"
+            className="w-full px-4 py-2 rounded-md border border-gray-600 focus:outline-none focus:border-blue-400  text-black"
+          />
+        </div>
+
+
+        <div className="mb-4">
+          <label
+            htmlFor="metaAccount"
+            className="block text-gray-400 text-sm mb-2"
+          >
+            MetaAccount
+          </label>
+          <input
+            id="metaAccount"
+            name="metaAccount"
             className="w-full px-4 py-2 rounded-md border border-gray-600 focus:outline-none focus:border-blue-400  text-black"
           />
         </div>
