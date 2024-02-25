@@ -1,11 +1,14 @@
 import mongoose, { Document, Schema, Types } from "mongoose";
-import { ConversationDocument } from "./Conversation";
+
+import { BotBabyDocument } from "./BotBaby";
+import { BotSearchDocument } from "./searchforge";
 
 interface IBot {
   name: string;
   mainPurpose: string;
   image: string;
-  conversations: Types.ObjectId[] | ConversationDocument[];
+  botSession: Types.ObjectId[] | BotBabyDocument[];
+  forgeSearch: Types.ObjectId[] | BotSearchDocument[];
 }
 
 export interface BotDocument extends IBot, Document {}
@@ -24,10 +27,16 @@ const BotSchema: Schema<BotDocument> = new Schema(
       type: String,
       required: true,
     },
-    conversations: [
+    botSession: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Conversation",
+        ref: "BotBaby",
+      },
+    ],
+    forgeSearch: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "BotForgeSearch",
       },
     ],
   },

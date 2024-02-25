@@ -1,4 +1,4 @@
-import mongoose, { Types } from "mongoose";
+import mongoose, { Schema, Types } from "mongoose";
 import { BotDocument } from "./Bot";
 
 interface IUser {
@@ -10,7 +10,7 @@ interface IUser {
   isPro: boolean;
   metaAddress: string;
   signature: string;
-  mainBot: Types.ObjectId[] | BotDocument[];
+  mainBot: Types.ObjectId | BotDocument;
 }
 
 // TODO: Make it better......
@@ -41,6 +41,10 @@ const UserSchema = new mongoose.Schema<IUser>(
     },
     signature: {
       type: String,
+    },
+    mainBot: {
+      type: Schema.Types.ObjectId,
+      ref: "Bot",
     },
     role: {
       type: String,
