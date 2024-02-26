@@ -47,6 +47,16 @@ export const LogInForm = () => {
         <button className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 float-right">
           Login
         </button>
+
+
+        {
+          state && (
+            <div>
+              {state}
+            </div>
+          )
+        }
+
       </form>
     </>
   );

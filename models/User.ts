@@ -10,7 +10,8 @@ interface IUser {
   isPro: boolean;
   metaAddress: string;
   membership: boolean;
-  token: String;
+  tokens: String;
+  count: String;
   signature: string;
   mainBot: Types.ObjectId | BotDocument;
 }
@@ -39,9 +40,13 @@ const UserSchema = new mongoose.Schema<IUser>(
       type: Boolean,
       default: false
     },
-    token: {
+    tokens: {
       type: String,
       default: "12"
+    },
+    count: {
+      type: String,
+      default: "24"
     },
     image: {
       type: String,

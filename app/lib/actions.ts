@@ -7,13 +7,15 @@ import dbConnect from "./db";
 import { User } from "@/models/User";
 import { compare, hash } from "bcryptjs";
 import { ethers } from "ethers";
+import { signIn } from "@/auth";
 
 export async function RegisterUser(
   signature: string,
   prevState: string | undefined,
   formData: FormData
 ) {
-  const { username, email, password, metaAccount } = Object.fromEntries(formData);
+  const { username, email, password, metaAccount } =
+    Object.fromEntries(formData);
 
   try {
     await dbConnect();
@@ -46,47 +48,60 @@ export async function AuthenticateUser(
   prevState: string | undefined,
   formData: FormData
 ) {
-  const { email, password} = Object.fromEntries(formData);
+  const { email, password } = Object.fromEntries(formData);
 
   try {
     await dbConnect();
 
     const existingUser = await User.findOne({ email });
 
-    if(!existingUser) return "sorry user no exist"
+    if (!existingUser) return "sorry user no exist";
 
-    const yono = await compare(password as string, existingUser.password)
+    const yono = await compare(password as string, existingUser.password);
 
-    if(yono) existingUser
+    if (!yono) return "password invalid";
+
+    console.log(yono)
+
+    try {
+      await signIn("credentials", {
+        email,
+        password,
+        redirectTo: "/dashboard",
+      });
+    } catch (error) {
+      console.error("Error during signIn:", error);
+      // Handle or log the error as needed
+    }
 
     return "Successfuly sign in";
-
   } catch (error) {
-
     console.log(error);
-    return "sorry cant seem to register user";
+    return "sorry cant seem to authenicate user";
   }
 }
 
-export async function nerd(  prevState: string | undefined, signature: string) {
+export async function nerd(prevState: string | undefined, signature: string) {
   try {
     await dbConnect();
 
-    const existing = await User.findOne({signature})
+    const existing = await User.findOne({ signature });
 
     if (!existing) {
-        console.log("NOT EXISTING")
+      console.log("NOT EXISTING");
       return "Sorry you must register with your walllet you dumbass";
     }
-    
+
     // const mes = process.env.SIGNMESSAGE as string
 
-    const userAddress = ethers.utils.verifyMessage(process.env.SIGNMESSAGE!, signature);
+    const userAddress = ethers.utils.verifyMessage(
+      process.env.SIGNMESSAGE!,
+      signature
+    );
 
-    console.log(userAddress)
-    
-    return "status ok"
+    console.log(userAddress);
 
+    return "status ok";
   } catch (error) {
     console.log(error);
     return "de ticket";
