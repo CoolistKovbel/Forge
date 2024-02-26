@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema, Types } from "mongoose";
 
 import { BotBabyDocument } from "./BotBaby";
-import { BotSearchDocument } from "./searchforge";
+import { BotSearchDocument } from "./Searchforge";
 
 interface IBot {
   name: string;
