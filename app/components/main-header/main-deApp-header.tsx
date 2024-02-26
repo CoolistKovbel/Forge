@@ -2,7 +2,7 @@
 import { auth } from "@/auth";
 import Link from "next/link";
 import Image from "next/image";
-import { SignOutButton } from "./SignOutButton";
+import { SignOutButton } from "../SignOutButton";
 
 
 const MainDeAppHeader = async () => {
@@ -25,9 +25,11 @@ const MainDeAppHeader = async () => {
 
 
       <nav  className="w-[200px] flex items-center">
+
         <Link href="/settings">Settings</Link>
 
         <SignOutButton />
+        
       </nav>
 
 

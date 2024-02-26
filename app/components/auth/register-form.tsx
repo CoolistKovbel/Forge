@@ -1,6 +1,6 @@
 "use client";
 
-import { RegisterUser } from "@/app/lib/actions";
+import { RegisterUser } from "@/app/madlib/actions";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";

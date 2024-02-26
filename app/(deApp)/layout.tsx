@@ -1,4 +1,4 @@
-import MainDeAppHeader from "../components/main-deApp-header";
+import MainDeAppHeader from "../components/main-header/main-deApp-header";
 
 
 

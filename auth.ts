@@ -1,7 +1,7 @@
 import authConfig from "@/auth.config";
 import NextAuth from "next-auth";
 import { AdapterUser } from "next-auth/adapters";
-import { findUserById } from "./app/lib/getUser";
+import { findUserById } from "./app/madlib/getUser";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   callbacks: {

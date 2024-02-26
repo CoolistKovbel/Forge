@@ -1,6 +1,6 @@
 "use client";
 
-import { AuthenticateUser } from "@/app/lib/actions";
+import { AuthenticateUser } from "@/app/madlib/actions";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useFormState } from "react-dom";

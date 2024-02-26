@@ -1,6 +1,6 @@
 "use client";
 
-import { nerd } from "@/app/lib/actions";
+import { nerd } from "@/app/madlib/actions";
 import { ethers } from "ethers";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";

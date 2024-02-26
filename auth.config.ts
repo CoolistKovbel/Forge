@@ -1,7 +1,7 @@
 import type { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { UserSignInFormSchema } from "./app/lib/schema";
-import { findUserByEamil, findUserByMetaAddress, findUserBySignature } from "./app/lib/getUser";
+import { UserSignInFormSchema } from "./app/madlib/schema";
+import { findUserByEamil, findUserByMetaAddress, findUserBySignature } from "./app/madlib/getUser";
 
 export default {
   pages: {
