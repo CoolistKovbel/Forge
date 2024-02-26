@@ -3,7 +3,7 @@ import { User } from "@/models/User";
 import { hash } from "bcryptjs";
 import { NextResponse } from "next/server";
 
-export async function Post(req: Request) {
+export async function POST(req: Request) {
   try {
     const data = await req.formData();
 
