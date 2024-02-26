@@ -2,17 +2,15 @@
 import { auth } from "@/auth";
 import Link from "next/link";
 import Image from "next/image";
-import { SignOutButton } from "../SignOutButton";
+import { UserMenu } from "./usermenu";
 
 
 const MainDeAppHeader = async () => {
   const authResult = await auth();
  
-  console.log(authResult?.user?._doc.username)
-
 
   return (
-    <header className="w-full bg-[#222] mb-10 flex items-center justify-between p-4 shadow-lg rounded-lg mx-auto">
+    <header className="w-full bg-[#111] text-white mb-10 flex items-center justify-between p-4 shadow-lg  mx-auto">
 
       <h2 className="font-bold text-[1.2rem]"><Link href="/dashboard" className="flex items-center gap-2">
         
@@ -24,14 +22,7 @@ const MainDeAppHeader = async () => {
       </h2>
 
 
-      <nav  className="w-[200px] flex items-center">
-
-        <Link href="/settings">Settings</Link>
-
-        <SignOutButton />
-        
-      </nav>
-
+      <UserMenu user={authResult?.user?._doc}/>
 
     </header>
   );
