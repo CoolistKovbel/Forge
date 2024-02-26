@@ -14,10 +14,10 @@ export async function RegisterUser(
   prevState: string | undefined,
   formData: FormData
 ) {
-  const { username, email, password, metaAccount } =
-    Object.fromEntries(formData);
-
   try {
+    const { username, email, password, metaAccount } =
+    Object.fromEntries(formData);
+    
     await dbConnect();
 
     const existingUser = await User.findOne({ email });
