@@ -1,9 +1,10 @@
 import { auth } from '@/auth'
-import React from 'react'
 
 const Page = async () => {
 
   const user = await auth()
+
+
 
   return (
     <div>

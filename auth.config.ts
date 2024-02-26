@@ -4,6 +4,9 @@ import { UserSignInFormSchema } from "./app/lib/schema";
 import { findUserByEamil, findUserBySignature } from "./app/lib/getUser";
 
 export default {
+  pages: {
+    signIn: "/login",
+  },
   providers: [
     Credentials({
       async authorize(credentials) {

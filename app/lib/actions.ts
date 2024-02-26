@@ -7,7 +7,7 @@ import dbConnect from "./db";
 import { User } from "@/models/User";
 import { compare, hash } from "bcryptjs";
 import { ethers } from "ethers";
-import { signIn } from "@/auth";
+import { signIn, signOut } from "@/auth";
 
 export async function RegisterUser(
   signature: string,
@@ -61,7 +61,6 @@ export async function AuthenticateUser(
 
     if (!yono) return "password invalid";
 
-    console.log(yono)
 
     try {
       await signIn("credentials", {
@@ -107,3 +106,8 @@ export async function nerd(prevState: string | undefined, signature: string) {
     return "de ticket";
   }
 }
+
+
+export const logout = async () => {
+  await signOut();
+};
