@@ -1,7 +1,7 @@
 import type { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { UserSignInFormSchema } from "./app/lib/schema";
-import { findUserByEamil, findUserBySignature } from "./app/lib/getUser";
+import { findUserByEamil, findUserByMetaAddress, findUserBySignature } from "./app/lib/getUser";
 
 export default {
   pages: {
@@ -29,7 +29,7 @@ export default {
           }
 
           if (signature) {
-            const existingUser = await findUserBySignature(
+            const existingUser = await findUserByMetaAddress(
               signature as string
             );
 

@@ -51,3 +51,20 @@ export const findUserBySignature = async (signature: string) => {
     return null;
   }
 };
+
+/**
+ * This checks the database to see if a user with the same email
+ *
+ *
+ */
+export const findUserByMetaAddress = async (metaAddress: string) => {
+  try {
+    await dbConnect();
+
+    const user = await User.findOne({ metaAddress });
+
+    return user;
+  } catch (error) {
+    return null;
+  }
+};

@@ -83,22 +83,29 @@ export async function AuthenticateUser(
 export async function nerd(prevState: string | undefined, signature: string) {
   try {
     await dbConnect();
+    
+    const userAddress = ethers.utils.verifyMessage(
+      process.env.SIGNMESSAGE!,
+      signature
+    );
 
-    const existing = await User.findOne({ signature });
+    const existing = await User.findOne({ metaAddress: userAddress });
 
     if (!existing) {
       console.log("NOT EXISTING");
       return "Sorry you must register with your walllet you dumbass";
     }
 
-    // const mes = process.env.SIGNMESSAGE as string
-
-    const userAddress = ethers.utils.verifyMessage(
-      process.env.SIGNMESSAGE!,
-      signature
-    );
-
-    console.log(userAddress);
+    try {
+      await signIn("credentials", {
+        signature: userAddress,
+        redirectTo: "/dashboard",
+      });
+    } catch (error) {
+      console.error("Error during signIn:", error);
+      // Handle or log the error as needed
+    }
+    
 
     return "status ok";
   } catch (error) {

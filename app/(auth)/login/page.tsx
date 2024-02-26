@@ -35,8 +35,7 @@ const LoginPage = () => {
 
       {/* MetaForm */}
       <MetaForm  outsideLove={message}/>
-
-
+      
     </div>
   );
 };
