@@ -1,13 +1,16 @@
+
 import MainDeAppHeader from "../components/main-header/main-deApp-header";
 
 
 
 
-export default function AuthLayout({
+export default async function AuthLayout({
     children,
   }: {
     children: React.ReactNode;
   }) {
+
+
     return (
       <main>
 
