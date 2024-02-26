@@ -1,4 +1,5 @@
-import { SignOutButton } from "../components/SignOutButton";
+import MainDeAppHeader from "../components/main-deApp-header";
+
 
 
 
@@ -10,9 +11,7 @@ export default function AuthLayout({
     return (
       <main>
 
-        <header>
-            <SignOutButton />
-        </header>
+        <MainDeAppHeader />
 
         <section>
           {children}

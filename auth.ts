@@ -10,7 +10,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async jwt({ token, user }) {
       try {
         if (user) {
-          const { ...restUser } = user;
+          const { _doc, ...restUser } = user as AdapterUser;
+          console.log('wht is in user', _doc)
           token.user = restUser;
         } else {
           if (token.sub) {
@@ -37,9 +38,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return token;
     },
     session({ session, token }) {
+
+      // console.log(token.user?._doc as AdapterUser, 'de tojen in session')
+
       session.user = token.user as AdapterUser;
 
-      console.log(session);
+      // console.log(session);
 
       return session;
     },
