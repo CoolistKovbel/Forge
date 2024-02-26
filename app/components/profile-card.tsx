@@ -1,19 +1,19 @@
 import Image from 'next/image';
 
 
-const UserProfileCard = () => {
-  // Sample user data
-  const user = {
-    username: 'JohnDoe',
-    email: 'john.doe@example.com',
-    image: 'https://placekitten.com/150/150', 
-  };
+interface ProfileCardProps {
+  user: any;
+}
+
+
+const UserProfileCard = ({user}: ProfileCardProps) => {
+
 
   return (
     <div className="max-w-[400px] bg-white rounded-md shadow-md p-6 text-black">
       <div className="mb-4 flex items-center">
         <Image
-          src={user.image}
+          src={user.image || 'https://placekitten.com/150/150'}
           alt="User Profile"
           width={120}
           height={120}

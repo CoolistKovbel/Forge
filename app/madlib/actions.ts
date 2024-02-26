@@ -118,3 +118,45 @@ export async function nerd(prevState: string | undefined, signature: string) {
 export const logout = async () => {
   await signOut();
 };
+
+export async function UpdateUserProfile( uaerId: string, prevState: string | undefined,
+  formData: FormData){
+
+    const { username, email, password, } =
+    Object.fromEntries(formData);
+
+  try {
+
+    await dbConnect()
+
+    const existingUser = await User.findById({_id: uaerId});
+
+    if (!existingUser) {
+      return 'User not found';
+    }
+
+    // Update fields only if provided in the formData
+    if (username) {
+      existingUser.username = username as string;
+    }
+
+    if (email) {
+      existingUser.email = email as string;
+    }
+
+    if (password) {
+      existingUser.password = await hash(password as string, 10);
+    }
+
+    // Save the changes
+    await existingUser.save();
+
+  
+  } catch (error) {
+    console.log(error)
+    return "Error updating the user...."
+  }
+
+  revalidatePath("/settings")
+  redirect("/settings")
+}
