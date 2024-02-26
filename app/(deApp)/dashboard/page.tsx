@@ -1,16 +1,13 @@
-import { auth } from '@/auth'
+
 
 const Page = async () => {
 
-  const user = await auth()
-
-
+  
 
   return (
-    <div>
+    <main className="w-full min-h-screen bg-[#111] text-white p-4">
         <h2>Dashboard</h2>
-        {JSON.stringify(user)}
-    </div>
+    </main>
   )
 }
 
