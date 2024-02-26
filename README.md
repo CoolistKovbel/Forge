@@ -14,3 +14,5 @@ if you havent can you please support me here
 https://urbanflexforge.com/
 
 if you purchase something before easter.... or being i launch my smart contract ill send you a personal email about something special i cooked up. 
+
+im am sorry for being a dumbass and rushing through everything. i have these people who just dont understand i am that person who will do anything to make sure everyone is happy at the end of the day. #yolo
