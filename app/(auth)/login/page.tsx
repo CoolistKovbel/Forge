@@ -1,4 +1,4 @@
-import { LogInForm } from "@/app/components/auth/login-form";
+import { LogInForm } from "@/app/components/auth/login-form-sad";
 import MetaForm from "@/app/components/auth/meta-form";
 import Link from "next/link";
 import React from "react";

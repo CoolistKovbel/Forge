@@ -1,4 +1,4 @@
-"use client";
+"use client"; 
 
 import { AuthenticateUser } from "@/app/madlib/actions";
 import { useRouter } from "next/navigation";
