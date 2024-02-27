@@ -9,9 +9,6 @@ import { compare, hash } from "bcryptjs";
 import { ethers } from "ethers";
 import { signIn, signOut } from "@/auth";
 
-
-dbConnect()
-
 export async function RegisterUser(
   signature: string,
   prevState: string | undefined,
@@ -21,7 +18,7 @@ export async function RegisterUser(
     const { username, email, password, metaAccount } =
     Object.fromEntries(formData);
     
-   
+    await dbConnect();
 
     const existingUser = await User.findOne({ email });
 
@@ -54,7 +51,7 @@ export async function AuthenticateUser(
   const { email, password } = Object.fromEntries(formData);
 
   try {
-   
+    await dbConnect();
 
     const existingUser = await User.findOne({ email });
 
@@ -85,7 +82,7 @@ export async function AuthenticateUser(
 
 export async function nerd(prevState: string | undefined, signature: string) {
   try {
-   
+    await dbConnect();
     
     const userAddress = ethers.utils.verifyMessage(
       process.env.SIGNMESSAGE!,
