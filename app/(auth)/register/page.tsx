@@ -1,4 +1,4 @@
-import { RegisterForm } from "@/app/components/auth/register-form";
+import  RegisterForm  from "@/app/components/auth/register-form";
 import Link from "next/link";
 
 

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 import { ethers } from "ethers";
 
-export const RegisterForm = () => {
+const RegisterForm = () => {
   const [signature, setSignature] = useState("");
 
   const router = useRouter();
@@ -94,3 +94,6 @@ export const RegisterForm = () => {
     </>
   );
 };
+
+
+export default RegisterForm
