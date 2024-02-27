@@ -7,31 +7,39 @@ import { useFormState } from "react-dom";
 import { ethers } from "ethers";
 
 export const RegisterForm = () => {
-  const [signature, setSignature] = useState("");
+  const [serverR, setServerR] = useState("");
 
   const router = useRouter();
-  const registerWithSignature = RegisterUser.bind(null, signature);
-  const [state, dispatch] = useFormState(registerWithSignature, undefined);
 
-  const getUserSignature = async () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const message = process.env.SIGNMESSAGE as string;
 
-    let signature = await signer.signMessage(message);
-    setSignature(signature);
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-    const userAddress = ethers.utils.verifyMessage(message, signature);
-    console.log(userAddress);
+    const formData = new FormData(e.currentTarget);
+
+    try {
+      
+      const res = await fetch("/api/register", {
+        method: 'POST',
+        body: formData
+      })
+
+      const dRes  = await res.json()
+
+      console.log(dRes)
+
+
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
-  useEffect(() => {
-    if (state?.startsWith("success create")) return router.push("/login");
-  }, [state, router]);
+
+
 
   return (
     <>
-      <form className="mb-8 w-full" action={dispatch}>
+      <form className="mb-8 w-full" onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="email" className="block text-gray-400 text-sm mb-2">
             Email:
